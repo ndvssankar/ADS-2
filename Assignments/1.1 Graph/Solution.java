@@ -42,9 +42,11 @@ public class Solution {
 			System.out.println(gm.V() + " vertices, " + gm.E() + " edges");
 			for (int v = 0; v < gm.V(); v++) {
 				StringBuffer sb = new StringBuffer();
-				sb.append(st.get(v) + ": ");
-				for (int w : gm.adj(v)) {
-					sb.append(st.get(w) + " ");
+				for (int w = 0; w < gm.V(); w++) {
+					if (gm.contains(v, w))
+						sb.append(1 + " ");
+					else
+						sb.append(0 + " ");
 				}
 				System.out.println(sb.toString());
 			}

@@ -15,8 +15,10 @@ Starting audit...
 [ERROR] /Sankar/MSIT-2018/ADS-2/Assignments/1.1 Graph/Solution.java:25: Line is longer than 80 characters (found 87). [LineLength]
 [ERROR] /Sankar/MSIT-2018/ADS-2/Assignments/1.1 Graph/Solution.java:37:30: 'while' is not followed by whitespace. [WhitespaceAround]
 [ERROR] /Sankar/MSIT-2018/ADS-2/Assignments/1.1 Graph/Solution.java:42: Line is longer than 80 characters (found 87). [LineLength]
+[ERROR] /Sankar/MSIT-2018/ADS-2/Assignments/1.1 Graph/Solution.java:46: 'if' construct must use '{}'s. [NeedBraces]
+[ERROR] /Sankar/MSIT-2018/ADS-2/Assignments/1.1 Graph/Solution.java:48: 'else' construct must use '{}'s. [NeedBraces]
 Audit done.
-Checkstyle ends with 16 errors.
+Checkstyle ends with 18 errors.
 Starting audit...
 [ERROR] /Sankar/MSIT-2018/ADS-2/Assignments/1.1 Graph/GraphMatrix.java:0: File does not end with a newline. [NewlineAtEndOfFile]
 [ERROR] /Sankar/MSIT-2018/ADS-2/Assignments/1.1 Graph/GraphMatrix.java:8: Line has trailing spaces. [RegexpSingleline]
