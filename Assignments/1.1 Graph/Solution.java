@@ -29,7 +29,7 @@ public class Solution {
 				for (int w : gl.adj(v)) {
 					sb.append(st.get(w) + " ");
 				}
-				System.out.println(sb.toString().trim());
+				System.out.println(sb.toString());
 			}
 			break;
 			case "Matrix":
@@ -46,7 +46,7 @@ public class Solution {
 				for (int w : gm.adj(v)) {
 					sb.append(st.get(w) + " ");
 				}
-				System.out.println(sb.toString().trim());
+				System.out.println(sb.toString());
 			}
 			break;
 		}
