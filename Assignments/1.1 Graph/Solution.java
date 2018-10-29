@@ -23,13 +23,17 @@ public class Solution {
 					Integer.parseInt(tokens[1]));
 			}
 			System.out.println(gl.V() + " vertices, " + gl.E() + " edges");
-			for (int v = 0; v < gl.V(); v++) {
-				StringBuffer sb = new StringBuffer();
-				sb.append(st.get(v) + ": ");
-				for (int w : gl.adj(v)) {
-					sb.append(st.get(w) + " ");
+			if (gl.V() <= 1)
+				System.out.println("No edges");
+			else {
+				for (int v = 0; v < gl.V(); v++) {
+					StringBuffer sb = new StringBuffer();
+					sb.append(st.get(v) + ": ");
+					for (int w : gl.adj(v)) {
+						sb.append(st.get(w) + " ");
+					}
+					System.out.println(sb.toString());
 				}
-				System.out.println(sb.toString());
 			}
 			break;
 			case "Matrix":
@@ -40,15 +44,19 @@ public class Solution {
 					Integer.parseInt(tokens[1]));
 			}
 			System.out.println(gm.V() + " vertices, " + gm.E() + " edges");
-			for (int v = 0; v < gm.V(); v++) {
-				StringBuffer sb = new StringBuffer();
-				for (int w = 0; w < gm.V(); w++) {
-					if (gm.contains(v, w))
-						sb.append(1 + " ");
-					else
-						sb.append(0 + " ");
+			if (gm.V() <= 1) {
+				System.out.println("No edges");
+			} else {
+				for (int v = 0; v < gm.V(); v++) {
+					StringBuffer sb = new StringBuffer();
+					for (int w = 0; w < gm.V(); w++) {
+						if (gm.contains(v, w))
+							sb.append(1 + " ");
+						else
+							sb.append(0 + " ");
+					}
+					System.out.println(sb.toString());
 				}
-				System.out.println(sb.toString());
 			}
 			break;
 		}

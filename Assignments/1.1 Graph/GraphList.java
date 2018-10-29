@@ -18,6 +18,10 @@ public class GraphList {
 	}
 
 	private boolean isParallelEdge(int v, int w) {
+		for (int e : adj(v)) {
+			if (e == w)
+				return true;
+		}
 		return false;
 	}
 

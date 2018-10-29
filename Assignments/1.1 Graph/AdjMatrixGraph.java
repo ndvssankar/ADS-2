@@ -45,12 +45,19 @@ public class AdjMatrixGraph {
     public int V() { return V; }
     public int E() { return E; }
 
-
     // add undirected edge v-w
     public void addEdge(int v, int w) {
-        if (!adj[v][w]) E++;
+    	//	Self Loop
+    	if (v == w)
+    		return;
+
+    	// Parallel edge.
+    	if (adj[v][w] == true)
+    		return;
+
         adj[v][w] = true;
         adj[w][v] = true;
+        E++;
     }
 
     // does the graph contain the edge v-w?
