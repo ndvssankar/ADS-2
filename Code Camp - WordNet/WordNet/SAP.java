@@ -3,12 +3,14 @@ public class SAP {
     Digraph graph;
     int ancestor;
     int distance;
+    BreadthFirstDirectedPaths bfsV;
+    BreadthFirstDirectedPaths bfsW;
 
     // constructor takes a digraph (not necessarily a DAG)
     public SAP(Digraph graph) {
         this.graph = graph;
-        distance = Integer.MAX_VALUE; 
-        ancestor = Integer.MIN_VALUE;
+        ancestor = -1;
+        distance = Integer.MAX_VALUE;
     }
 
     // length of shortest ancestral path between v and w; -1 if no such path
@@ -18,8 +20,9 @@ public class SAP {
 
     // a common ancestor of v and w that participates in a shortest ancestral path; -1 if no such path
     public int ancestor(int v, int w) {
-        BreadthFirstDirectedPaths bfsV = new BreadthFirstDirectedPaths(graph, v);
-        BreadthFirstDirectedPaths bfsW = new BreadthFirstDirectedPaths(graph, w);
+        bfsV = new BreadthFirstDirectedPaths(graph, v);
+        bfsW = new BreadthFirstDirectedPaths(graph, w);
+        distance = Integer.MAX_VALUE;
         for (int e = 0; e < graph.V(); e++) {
             if (bfsV.hasPathTo(e) && bfsW.hasPathTo(e)) {
                 if (distance >= (bfsV.distTo(e) + bfsW.distTo(e))) {
@@ -39,7 +42,7 @@ public class SAP {
     // a common ancestor that participates in shortest ancestral path; -1 if no such path
     public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
         int anc = -1;
-        int length = -1;
+        int length = Integer.MAX_VALUE;
         for (int e1 : v) {
             for (int e2 : w) {
                 int ancestor = ancestor(e1, e2);

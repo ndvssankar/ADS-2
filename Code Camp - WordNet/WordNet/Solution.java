@@ -17,7 +17,7 @@ public class Solution {
 			try {
 				while (scan.hasNextLine()) {
 					String query = scan.nextLine();
-					System.out.println(wordNet.processQueries(query));
+					wordNet.processQuery(query);
 				}
 			} catch(IllegalArgumentException iaEx) {
 				System.out.println(iaEx.getMessage());

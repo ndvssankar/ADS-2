@@ -100,13 +100,14 @@ public class WordNet {
         return alist.get(ancestor);
     }
 
-    public String processQueries(String query) {
+    public void processQuery(String query) {
         String[] tokens = query.split(" ");
-        if (!isNoun(tokens[0]) || !isNoun(tokens[1])) {
-            throw new IllegalArgumentException("IllegalArgumentException");
-        } else {
+        String str = "";
+        if (isNoun(tokens[0]) && isNoun(tokens[1])) {
             sap = new SAP(graph);
-            return sap(tokens[0], tokens[1]);
+            str = sap(tokens[0], tokens[1]);
+            int distance = distance(tokens[0], tokens[1]);
+            System.out.println("distance = " + distance + ", ancestor = " + str);
         }
     }
 
