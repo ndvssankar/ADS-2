@@ -33,10 +33,24 @@ public class WordNet {
         return graph;
     }
 
+    private boolean isRootedDAG(Digraph graph) {
+        int count = 0;
+        for (int v = 0; v < graph.V(); v++) {
+            if (graph.outdegree(v) == 0) {
+                count++;
+            }
+        }
+        if (count == 1)
+            return true;
+        return false;
+    }
+
     public void printGraph() {
         DirectedCycle dc = new DirectedCycle(graph);
         if (dc.hasCycle()) {
             System.out.println("Cycle detected");
+        } else if (!isRootedDAG(graph)) {
+            System.out.println("Multiple roots");
         } else {
             System.out.println(graph);
         }
