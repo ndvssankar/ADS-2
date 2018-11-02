@@ -78,6 +78,13 @@ public class WordNet {
         return "";
     }
 
+    public void processQueries(String query) {
+        String[] tokens = query.split(" ");
+        if (tokens[0].equals("null") || tokens[1].equals("null")) {
+            throw new IllegalArgumentException("IllegalArgumentException");
+        }
+    }
+
     // do unit testing of this class
     public static void main(String[] args) {
 

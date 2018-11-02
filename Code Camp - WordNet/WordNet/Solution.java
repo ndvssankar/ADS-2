@@ -14,6 +14,14 @@ public class Solution {
 			wordNet.printGraph();
 			break;
 			case "Queries":
+			try {
+				while (scan.hasNextLine()) {
+					String query = scan.nextLine();
+					wordNet.processQueries(query);
+				}
+			} catch(IllegalArgumentException iaEx) {
+				System.out.println(iaEx.getMessage());
+			}
 			break;
 			default:
 			break;
