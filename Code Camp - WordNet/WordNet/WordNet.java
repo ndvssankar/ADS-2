@@ -1,10 +1,16 @@
+import java.util.ArrayList;
 
 public class WordNet {
 
-    Digraph graph;
+    private SAP sap;
+    private Digraph graph;
+    private ArrayList<String> alist;
+    private LinearProbingHashST<String, Bag<Integer>> ht;
 
     // constructor takes the name of the two input files
     public WordNet(String synsets, String hypernyms) {
+        ht = new LinearProbingHashST<String, Bag<Integer>>();
+        alist = new ArrayList<String>();
         int V = processSynsets(synsets);
         graph = buildGraph(hypernyms, V);
     }
@@ -12,8 +18,21 @@ public class WordNet {
     private int processSynsets(String synsets) {
         In in = new In(synsets);
         int count = 0;
+        alist = new ArrayList<String>();
         while(in.hasNextLine()) {
-            in.readLine();
+            String[] tokens = in.readLine().split(",");
+            String[] nouns = tokens[1].split(" ");
+            Bag<Integer> bag;
+            alist.add(Integer.parseInt(tokens[0]), tokens[1]);
+            for (String noun : nouns) {
+                if (ht.contains(noun)) {
+                    bag = ht.get(noun);
+                } else {
+                    bag = new Bag<Integer>();
+                }
+                bag.add(Integer.parseInt(tokens[0]));
+                ht.put(noun, bag);
+            }
             count++;
         }
         return count;
@@ -40,9 +59,7 @@ public class WordNet {
                 count++;
             }
         }
-        if (count == 1)
-            return true;
-        return false;
+        return (count == 1) ? true : false;
     }
 
     public void printGraph() {
@@ -56,15 +73,14 @@ public class WordNet {
         }
     }
 
-
     // returns all WordNet nouns
     public Iterable<String> nouns() {
-        return null;
+        return ht.keys();
     }
 
     // is the word a WordNet noun?
     public boolean isNoun(String word) {
-        return false;
+        return ht.contains(word);
     }
 
     // distance between nounA and nounB (defined below)
@@ -75,13 +91,19 @@ public class WordNet {
     // a synset (second field of synsets.txt) that is the common ancestor of nounA and nounB
     // in a shortest ancestral path (defined below)
     public String sap(String nounA, String nounB) {
-        return "";
+        int ancestor = sap.ancestor(ht.get(nounA), ht.get(nounB));
+        if (ancestor == -1)
+            throw new IllegalArgumentException("IllegalArgumentException");
+        return alist.get(ancestor);
     }
 
-    public void processQueries(String query) {
+    public String processQueries(String query) {
         String[] tokens = query.split(" ");
         if (tokens[0].equals("null") || tokens[1].equals("null")) {
             throw new IllegalArgumentException("IllegalArgumentException");
+        } else {
+            sap = new SAP(graph);
+            return sap(tokens[0], tokens[1]);
         }
     }
 
