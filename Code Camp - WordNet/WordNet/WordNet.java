@@ -80,12 +80,15 @@ public class WordNet {
 
     // is the word a WordNet noun?
     public boolean isNoun(String word) {
+        if (word.equals("null")) {
+            throw new IllegalArgumentException("IllegalArgumentException");
+        }
         return ht.contains(word);
     }
 
     // distance between nounA and nounB (defined below)
     public int distance(String nounA, String nounB) {
-        return 0;        
+        return sap.length(ht.get(nounA), ht.get(nounB));
     }
 
     // a synset (second field of synsets.txt) that is the common ancestor of nounA and nounB
@@ -99,7 +102,7 @@ public class WordNet {
 
     public String processQueries(String query) {
         String[] tokens = query.split(" ");
-        if (tokens[0].equals("null") || tokens[1].equals("null")) {
+        if (!isNoun(tokens[0]) || !isNoun(tokens[1])) {
             throw new IllegalArgumentException("IllegalArgumentException");
         } else {
             sap = new SAP(graph);
