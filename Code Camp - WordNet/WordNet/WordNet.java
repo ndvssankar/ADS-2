@@ -34,7 +34,12 @@ public class WordNet {
     }
 
     public void printGraph() {
-        System.out.println(graph);
+        DirectedCycle dc = new DirectedCycle(graph);
+        if (dc.hasCycle()) {
+            System.out.println("Cycle detected");
+        } else {
+            System.out.println(graph);
+        }
     }
 
 
