@@ -3,6 +3,8 @@ import edu.princeton.cs.algs4.SET;
 // import edu.princeton.cs.algs4.StdOut;
 // import edu.princeton.cs.algs4.In;
 
+import java.util.*;
+
 public class BoggleSolver {
     // Initializes the data structure using the given array of strings as the dictionary.
     // (You can assume each word in the dictionary contains only the uppercase letters A through Z.)
@@ -14,7 +16,9 @@ public class BoggleSolver {
     public BoggleSolver(String[] dictionary) {
         dictTST = new TrieST<Integer>();
         int[] scores = {0, 0, 0, 1, 1, 2, 3, 5, 11};
+        int count = 0;
         for (String word : dictionary) {
+            count++;
             if (word.length() < scores.length)
                 dictTST.put(word, scores[word.length()]);
             else
@@ -55,10 +59,6 @@ public class BoggleSolver {
 
     private Iterable<String> findAllWords(BoggleBoard board) {
 
-        if (board == null) {
-            throw new IllegalArgumentException("IllegalArgumentException");
-        }
-
         rows = board.rows();
         cols = board.cols();
 
@@ -75,6 +75,10 @@ public class BoggleSolver {
 
     // Returns the set of all valid words in the given Boggle board, as an Iterable.
     public Iterable<String> getAllValidWords(BoggleBoard board) {
+        if (board == null) {
+            throw new IllegalArgumentException("board is null");
+        }
+
         return findAllWords(board);
     }
 
