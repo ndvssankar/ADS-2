@@ -106,6 +106,13 @@ public class SeamCarver {
                 energies[row][col] += min;
             }
         }
+        StdOut.println("");
+        for (int row = 0; row < h; row++) {
+          for (int col = 0; col < w; col++) {
+            StdOut.printf("%9.2f ", energies[row][col]);
+          }
+          StdOut.println("");
+        }
     }
 
     private int[] minVerticalPath(double[][] energies) {
